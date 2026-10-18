@@ -1,67 +1,109 @@
-GRAMMAR QUEST
-A grammar game for Grades 6 to 9 (ages 11 to 15), played on the smart board.
+# Grammar Quest
 
+A classroom grammar game for **Grades 6 to 9 (ages 11 to 15)**, built for a school smart board. It runs in any web browser, works offline, and needs no installation.
 
-HOW TO OPEN THE GAME
---------------------
-1. Keep every file together in this one folder. Do not move single files out.
-2. Double-click the file called  index.html
-3. It opens in a web browser (Chrome or Edge is best). No internet is needed.
+Built with plain HTML, CSS and JavaScript. No frameworks, no build step, no internet connection needed.
 
-Tip: press the full-screen button (top right of the game) for the best view.
+## Features
 
-If the smart board runs Android and the file will not open, tell the person
-who built the game. It can also be put online so you only need a link.
+- **Five game types**
+  - **Fill the Blank**: choose the word that completes the sentence.
+  - **Spot the Mistake**: tap the word that is wrong.
+  - **Sentence Builder**: tap jumbled words into the right order.
+  - **Word Sorter**: tap a word, then tap the basket it belongs in.
+  - **Mixed Challenge**: a little of every game.
+- **Four grades**, each with its own questions: 136 questions in total.
+- **Whole class or 2 to 4 teams**, with editable team names, a live scoreboard and turn taking.
+- **Short lesson after every question**: the game shows the grammar rule, so wrong answers become teaching moments.
+- **Made for smart boards**: large touch targets, high-contrast school theme (chalkboard header, ruled paper, pencil mascot), full-screen button and sound toggle.
+- **Teacher-friendly question editing**: all questions live in one plain text file, with a checker page that explains mistakes in plain words.
 
+## Grammar topics
 
-HOW TO PLAY
------------
+| Grade | Ages | Topics |
+|-------|------|--------|
+| 6 | 11 to 12 | Nouns, verbs, plurals, a and an, simple tenses |
+| 7 | 12 to 13 | Adverbs, comparing, prepositions, continuous tenses |
+| 8 | 13 to 14 | Present perfect, passive voice, modals, conditionals |
+| 9 | 14 to 15 | Reported speech, conditionals, passive, linking words |
+
+## How to run
+
+1. Download or clone this repository.
+2. Keep all files together in one folder.
+3. Double-click **`index.html`**. It opens in Chrome, Edge or Firefox.
+
+That is all. Because it is a static web page, it also works on any smart board that has a browser, whether the board runs Windows, Android or Linux.
+
+**Optional: put it online.** In your GitHub repository go to *Settings > Pages*, choose the `main` branch and the root folder, and save. GitHub gives you a link the teacher can open on any device.
+
+## How to play
+
 1. Choose the grade.
-2. Choose a game:
-     Fill the Blank     pick the word that completes the sentence
-     Spot the Mistake   tap the word that is wrong
-     Sentence Builder   tap the jumbled words in the right order
-     Word Sorter        tap a word, then tap the basket it belongs in
-     Mixed Challenge    a little of every game
-3. Choose Whole class, or 2 to 4 teams. Teams can have their own names.
-4. Press Start game. Teams take turns, one question each.
+2. Choose a game.
+3. Choose **Whole class** or 2 to 4 teams, and rename the teams if you like.
+4. Press **Start game**. Teams take turns, one question each.
 
-Scoring: 10 points for a correct answer. A team that answers 3 or more in a
-row perfectly gets 5 bonus points on each one after that. After every
-question the game shows the rule, so it works as a short lesson too.
+**Scoring:** 10 points for a correct answer. A team that answers three or more in a row without a mistake earns 5 bonus points on each answer after that.
 
-Sound can be switched off with the speaker button at the top right.
+## Adding or changing questions
 
+All questions are in **`questions.js`**. Open it in any text editor (Notepad is fine) and copy an existing question as a template.
 
-ADDING OR CHANGING QUESTIONS
-----------------------------
-All questions are in the file  questions.js . Right-click it, choose
-"Open with", and pick Notepad. The top of the file explains each kind of
-question. The easiest way to add one is to copy an existing question,
-paste it below, and change the words.
+```js
+// Fill the Blank
+{ q: "She ___ to school every day.", options: ["go", "goes", "going", "gone"], a: "goes",
+  why: "With he, she or it, the verb ends in -s." },
 
-Example of a Fill the Blank question:
+// Spot the Mistake
+{ s: "She go to school by bus.", wrong: "go", fix: "She goes to school by bus.",
+  why: "With she, he or it, the simple present verb needs -s or -es." },
 
-      { q: "She ___ to school every day.", options: ["go", "goes", "going", "gone"], a: "goes",
-        why: "With he, she or it, the verb ends in -s." },
+// Sentence Builder (alt lists other accepted word orders)
+{ s: "We went to the beach last summer.", alt: ["Last summer we went to the beach."] },
+
+// Word Sorter
+{ title: "Singular or plural?", buckets: ["Singular", "Plural"],
+  items: [["mouse", "Singular"], ["mice", "Plural"]],
+  tip: "Some nouns change inside the word to make a plural." },
+```
 
 Rules that keep the file working:
-  - Keep the quote marks "like this" and the commas at the end of each line.
-  - The last question in a list has no comma after its closing bracket.
-  - In Fill the Blank, the answer (a) must be written exactly like one of the options.
-  - In Spot the Mistake, the wrong word must appear once in the sentence.
 
-After you save your changes, open  check-questions.html . It tells you in
-plain words if anything needs fixing. A broken question is skipped by the
-game, so nothing crashes.
+- Keep the quote marks and the commas at the end of each line.
+- The last question in a list has no comma after its closing bracket.
+- In Fill the Blank, the answer `a` must match one of the options exactly.
+- In Spot the Mistake, the wrong word must appear once in the sentence.
 
-Keep a copy of questions.js before editing, so you can go back to it.
+After saving, open **`check-questions.html`**. It lists any problem in plain words. The game skips a broken question, so nothing crashes.
 
+## Project structure
 
-FILES IN THIS FOLDER
---------------------
-index.html            the game (open this one)
-check-questions.html  checks your questions after editing
-questions.js          all the questions
-style.css, app.js,
-validate.js           the game itself (no need to open these)
+```
+index.html            the game (open this file)
+check-questions.html  checks questions after editing
+questions.js          the question bank (data)
+app.js                game engine and screens
+validate.js           question validation, shared by the game and the checker
+style.css             school theme and layout
+README.txt            plain-text instructions for teachers
+```
+
+## How it works
+
+- **Data structure:** the question bank is a nested object keyed by grade, holding arrays of question objects for each game type.
+- **Selection:** questions are drawn with a Fisher-Yates shuffle and kept in a queue, so no question repeats within a round.
+- **Answer checking:** Sentence Builder compares normalised word sequences held in sets, so sentences with more than one correct word order are accepted.
+- **Validation:** `validate.js` checks every question before play and skips any that are malformed.
+
+## Browser support
+
+Current versions of Chrome, Edge, Firefox and Safari, on desktop, Android and iPadOS. If a smart board has an older built-in browser, install or update Chrome or Edge.
+
+## Contributing
+
+Ideas for new questions, grammar topics and game types are welcome. Open an issue or a pull request. For new questions, run `check-questions.html` first and make sure it reports no problems.
+
+## License
+
+Add a license of your choice (for example MIT) before sharing publicly.
