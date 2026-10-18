@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grammar Quest</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <button class="brand" id="btn-home" type="button" aria-label="Back to the start">
+        <span class="brand-mark" id="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Grammar Quest</span>
+      </button>
+      <div class="tools">
+        <button class="tool" id="btn-sound" type="button"></button>
+        <button class="tool" id="btn-full" type="button" aria-label="Full screen"></button>
+      </div>
+    </header>
+    <main id="screen" aria-live="polite"></main>
+  </div>
+  <noscript>Grammar Quest needs JavaScript. Please open this file in Chrome, Edge or Firefox.</noscript>
+
+  <script src="questions.js"></script>
+  <script src="validate.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
